@@ -27,9 +27,9 @@ def knapsack(vals: list[int], weights: list[int], cap: int) -> list[list[int]]:
             else:
                 dp[i][j] = dp[i-1][j]
 
-    return dp
+    return dp[n][cap]
 
-def spaceKnapsack(vals: list[int], weights: list[int], cap: [int]) -> int:
+def constantSpaceKnapsack(vals: list[int], weights: list[int], cap: [int]) -> int:
     n = len(vals)
     prev = [0 for j in range(cap+1)]
     curr = [0 for j in range(cap+1)]
@@ -54,5 +54,8 @@ def showTable(tbl: list[list[int]]):
         for j in range(m):
             print(tbl[i][j], end="\t")
         print()
-    
-print(spaceKnapsack(vl, wt, W))
+
+print("2D solution")
+print(knapsack(vl, wt, W))
+print("Space Efficient Solution")
+print(constantSpaceKnapsack(vl, wt, W))

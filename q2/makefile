@@ -1,11 +1,5 @@
-targets=bin/shortestPath bin/longestPath
+.phony: run
 
-.phony: all clean
-all: $(targets)
-
-clean:
-	-rm $(targets)
-
-bin/%: src/%.hs
-	ghc -odir build -hidir build -o $@ $^
+run: 
+	python3 src/longest_path.py data/DAG_edge_list.txt
 

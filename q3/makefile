@@ -7,8 +7,8 @@ objdir="-odir objects"
 intdir="-hidir interface"
 
 bin/%: src/%.hs
-	ghc -o $@ $(objdir) $(intdir) $^
+	ghc -o $@ $^
 
 clean: 
-	-rm $(targets)
+	-rm $(targets) objects/* interface/*
 

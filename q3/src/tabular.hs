@@ -4,17 +4,20 @@ import Data.List ( unfoldr )
 
 main = do
     n <- read.head <$> getArgs :: IO Int
-    print $ dpalt n
-
-tupsum :: (Integer, Integer, Integer) -> Integer
-tupsum (a,b,c) = a+b+c
+    let result = dp n ! n
+    putStrLn $ show (length result) ++ " valid strings of length " ++ show n
+    mapM_ putStrLn result
 
 -- dp n is the 3-tuple of the number of strings of length n with exactly 0, 1, and 2 consecutive 1's respectively
-dp :: Int -> Array Int (Integer, Integer, Integer)
+dp :: Int -> Array Int [String]
 dp n = sltn
-    where sltn = array (1,n) [(i, go i) | i <- [1..n]]
-          go 1 = (1,1,0)
-          go n = let (a,b,c) = sltn ! (n-1) in (a+b+c, a, b)
+    where sltn = array (0,n) [(i, go i) | i <- [0..n]]
+          go 0 = [""]
+          go 1 = ["0", "1"]
+          go 2 = ["00", "01", "10", "11"]
+          go n = (map ("110"++) (sltn ! (n-3))) ++
+                 (map ("10"++)  (sltn ! (n-2))) ++
+                 (map ("0"++)   (sltn ! (n-1)))
 
 dpalt :: Int -> Integer
 dpalt 0 = 0
