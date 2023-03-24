@@ -5,8 +5,7 @@ import Data.List ( unfoldr )
 main = do
     n <- read.head <$> getArgs :: IO Int
     let result = dp n ! n
-    putStrLn $ show (length result) ++ " valid strings of length " ++ show n
-    mapM_ putStrLn result
+    print $ dpalt n
 
 -- dp n is the 3-tuple of the number of strings of length n with exactly 0, 1, and 2 consecutive 1's respectively
 dp :: Int -> Array Int [String]

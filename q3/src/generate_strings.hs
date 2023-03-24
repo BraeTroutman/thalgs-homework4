@@ -1,3 +1,7 @@
+{-
+ - Generate all binary strings of length n
+ -}
+
 import Data.List (unfoldr, isInfixOf)
 import Data.Functor
 import System.Environment (getArgs)
