@@ -21,10 +21,14 @@ def sources(graph: dict[int, list[int]]) -> list[int]:
 def toposort(graph: dict[int, list[int]]) -> list[int]:
     """return an ordering of nodes in the graph such that if there is
        an edges from (u,v) u precedes v in the ordering"""
+    # stores our topological ordering
     stack = []
+    # stack to keep track of nodes with indegree 0
     zeroes = []
+    # hold indegrees for each node
     indegrees = {i: 0 for i in graph.keys()}
 
+    # calculate indegrees for each node
     for u in list(graph.keys()):
         for v in graph[u]:
             graph[v] = graph.get(v, [])
@@ -32,10 +36,12 @@ def toposort(graph: dict[int, list[int]]) -> list[int]:
         for v in graph[u]:
             indegrees[v] = indegrees.get(v, 0) + 1
 
+    # append nodes of indegree 0 to stack of zeroes
     for i,degree in indegrees.items():
         if degree == 0:
             zeroes.append(i)
 
+    # as long as there are still nodes left of indegree 0:
     while zeroes:
         u = zeroes.pop()
         stack.append(u)
